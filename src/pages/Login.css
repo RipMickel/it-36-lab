@@ -7,7 +7,7 @@ html, body, ion-app, ion-page {
   
   /* Background styling for the Login page */
   .login-page {
-    background: url('https://cdn.dribbble.com/userupload/42197344/file/original-ca38e602be31110c65910ab190294b99.gif') no-repeat center center fixed;
+    background: url('https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExanEwZ3hkenl0bWRjdmFrem5tbjY1YW14MGpmajFxb2w3ZzJ0cDB4MSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l1J3vXGjuykBjNriM/giphy.gif') no-repeat center center fixed;
     background-size: cover;
     min-height: 100%;
     color: white; /* Make sure text is visible */
