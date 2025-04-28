@@ -1,0 +1,75 @@
+    /* Register Page Styles */
+html, body, ion-app, ion-page {
+    height: 100%;
+    margin: 0;
+    color: white,
+
+  }
+  
+  .register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    position: relative;
+    color:blue;
+  }
+  
+  .register-card {
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 15px;
+    padding: 20px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    color: white,
+  }
+  
+  .gif-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .register-icon {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #555;
+  }
+  
+  .input-field {
+    margin-bottom: 15px;
+    color: white;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid #fff;
+    border-radius: 10px;
+  }
+  
+  .register-button {
+    margin-top: 15px;
+    background-color: #5e92f3;
+    color: white;
+    border-radius: 10px;
+  }
+  
+  .register-already-button {
+    margin-top: 10px;
+    color: white;
+  }
+  
+  .modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 5px;
+  }
+  
+  .modal-buttons ion-button {
+    margin-left: 5px;
+  }
+
+  
