@@ -5,14 +5,14 @@
   "type": "module",
   "homepage": "https://github.com/RipMickel/https://github.com/RipMickel/it-36-lab",
 "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "dev": "vite",
-    "build": "vite build",
+    "build": "tsc && vite build",
     "preview": "vite preview",
     "test.e2e": "cypress run",
     "test.unit": "vitest",
-    "lint": "eslint .",
-    "predeploy": "vite build",
-    "deploy": "gh-pages -d dist"
+    "lint": "eslint"
   },
   "dependencies": {
     "@ionic/react": "^8.5.5",
