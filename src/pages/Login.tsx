@@ -26,7 +26,7 @@ const Login: React.FC = () => {
     style.innerHTML = `
       ion-content {
         --background: transparent;
-        background-image: url('https://cdn.dribbble.com/userupload/42197344/file/original-ca38e602be31110c65910ab190294b99.gif');
+        background-image: url('https://img.freepik.com/free-photo/galaxy-nature-aesthetic-background-starry-sky-mountain-remixed-media_53876-126761.jpg?t=st=1745818411~exp=1745822011~hmac=da57517a476eb7aa23c4b5689935e72b190eef38899488df0d7bbc76a89b75a1&w=1060');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -82,7 +82,7 @@ const Login: React.FC = () => {
           <div className="login-container">
             <div className="login-card">
               <img
-                src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExMmp1Z3lvY2ZzNXF2bTRkOWZsbHU1ODN3d3E0bHVydGF1aG1pcnoyYiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/13twUEuUnCrEju/giphy.gif"
+                src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExZXRhcGUwbmVsb3VzbGNiamRwc3Vsdms1d2Z3bnAzaHZzOGdxMHV5dyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/6utNxL2fGvEL5tFBZr/giphy.gif"
                 alt="Login Animation"
                 className="login-icon"
               />
