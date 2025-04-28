@@ -1,0 +1,83 @@
+/* Ensure the background is applied to the entire page */
+html, body, ion-app, ion-page {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Background styling for the Login page */
+  .login-page {
+    background: url('https://cdn.dribbble.com/userupload/42197344/file/original-ca38e602be31110c65910ab190294b99.gif') no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100%;
+    color: white; /* Make sure text is visible */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  ion-content {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+  }
+  
+  /* Login container for centering */
+  .login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    position: relative;
+  }
+  
+  /* Card for Login Form */
+  .login-card {
+    background: rgba(0, 0, 0, 0.6); /* Semi-transparent black background */
+    border-radius: 15px;
+    padding: 20px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    color: white; /* Ensure text color matches with background */
+  }
+  
+  /* Login Icon Style */
+  .login-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #555;
+    margin-bottom: 20px;
+  }
+  
+  /* Input Fields */
+  .input-field {
+    margin-bottom: 15px;
+    color: white;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid #fff;
+    border-radius: 10px;
+  }
+  
+  /* Login Button */
+  .login-button {
+    margin-top: 15px;
+    background-color: #5e92f3;
+    color: white;
+    border-radius: 10px;
+  }
+  
+  /* Styling for the Register button */
+ .login-register-button {
+    margin-top: 10px;
+    color: white;  }
+  
+
+  
+  
+  

@@ -15,7 +15,7 @@ import {
     IonToolbar, 
     useIonRouter
 } from '@ionic/react';
-import {homeOutline, logOutOutline, rocketOutline, settingsOutline} from 'ionicons/icons';
+import {homeOutline, logOutOutline, rocketOutline,} from 'ionicons/icons';
 import { Route, Redirect } from 'react-router';
 import Home from './Home';
 import About from './About';
@@ -28,16 +28,15 @@ const Menu: React.FC = () => {
    const [errorMessage, setErrorMessage] = useState('');
    const [showToast, setShowToast] = useState(false);
   const path = [
-      {name:'Home', url: '/it35-lab/app/home', icon: homeOutline},
-      {name:'About', url: '/it35-lab/app/about', icon: rocketOutline},
-      {name:'Profile', url: '/it35-lab/app/profile', icon: settingsOutline},
+      {name:'Home', url: '/it-36-lab/app/home', icon: homeOutline},
+      {name:'About', url: '/it-36-lab/app/about', icon: rocketOutline},
   ]
   const handleLogout = async () => {
       const { error } = await supabase.auth.signOut();
       if (!error) {
           setShowToast(true);
           setTimeout(() => {
-              navigation.push('/it35-lab', 'back', 'replace'); 
+              navigation.push('/it-36-lab', 'back', 'replace'); 
           }, 300); 
       } else {
           setErrorMessage(error.message);

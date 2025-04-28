@@ -1,10 +1,10 @@
-import {  
+import {
   IonAlert,
   IonButton,
-  IonContent, 
-  IonInput, 
-  IonPage,  
-  IonToast,  
+  IonContent,
+  IonInput,
+  IonPage,
+  IonToast,
   useIonRouter
 } from '@ionic/react';
 import { useState, useEffect } from 'react';
@@ -18,6 +18,7 @@ const Login: React.FC = () => {
   const [alertMessage, setAlertMessage] = useState('');
   const [showAlert, setShowAlert] = useState(false);
   const [showToast, setShowToast] = useState(false);
+  const [isLoading, setIsLoading] = useState(true); // State for loading screen visibility
 
   // Apply background on the Login page
   useEffect(() => {
@@ -38,7 +39,12 @@ const Login: React.FC = () => {
     `;
     document.head.appendChild(style);
 
-    // Cleanup: Remove the style when the component unmounts
+
+    setTimeout(() => {
+      setIsLoading(false); 
+    }, 3000); 
+
+
     return () => {
       document.head.removeChild(style);
     };
@@ -53,47 +59,64 @@ const Login: React.FC = () => {
       return;
     }
 
-    setShowToast(true); 
+    setShowToast(true);
     setTimeout(() => {
-      navigation.push('/it35-lab/app', 'forward', 'replace');
+      navigation.push('/it-36-lab/app', 'forward', 'replace');
     }, 300);
   };
 
   return (
     <IonPage>
-      <IonContent className='ion-padding' fullscreen>
-        <div className="login-container">
-          <div className="login-card">
-            <img 
-              src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExMmp1Z3lvY2ZzNXF2bTRkOWZsbHU1ODN3d3E0bHVydGF1aG1pcnoyYiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/13twUEuUnCrEju/giphy.gif" 
-              alt="Login Animation" 
-              className="login-icon"
+      <IonContent className="ion-padding" fullscreen>
+        {isLoading ? (
+          // Show loading screen (can be a GIF, Video, or Spinner)
+          <div className="loading-screen">
+            <img
+              src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZXlsejZjdzZ4b2VtbXFiNGx5Mndoc2p1c3VzMWJqbDgxNGhwN2VkMCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/C3brYLms1bhv2/giphy.gif" // Replace with your GIF or video URL
+              alt="Loading..."
+              style={{ width: '100%', height: '100%' }} // Adjust size as needed
             />
-            <h2>Login</h2>
-            <IonInput
-              placeholder="Email"
-              type="email"
-              value={email}
-              onIonChange={e => setEmail(e.detail.value!)}
-              fill="outline"
-              className="input-field"
-            />
-            <IonInput
-              placeholder="Password"
-              type="password"
-              value={password}
-              onIonChange={e => setPassword(e.detail.value!)}
-              fill="outline"
-              className="input-field"
-            />
-            <IonButton onClick={doLogin} expand="block" className="login-button">
-              Login
-            </IonButton>
-            <IonButton routerLink="/it35-lab/register" expand="block" fill="clear" className="login-register-button">
-              Register
-            </IonButton>
           </div>
-        </div>
+        ) : (
+          // Show the login form after loading
+          <div className="login-container">
+            <div className="login-card">
+              <img
+                src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExMmp1Z3lvY2ZzNXF2bTRkOWZsbHU1ODN3d3E0bHVydGF1aG1pcnoyYiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/13twUEuUnCrEju/giphy.gif"
+                alt="Login Animation"
+                className="login-icon"
+              />
+              <h2>Login</h2>
+              <IonInput
+                placeholder="Email"
+                type="email"
+                value={email}
+                onIonChange={(e) => setEmail(e.detail.value!)}
+                fill="outline"
+                className="input-field"
+              />
+              <IonInput
+                placeholder="Password"
+                type="password"
+                value={password}
+                onIonChange={(e) => setPassword(e.detail.value!)}
+                fill="outline"
+                className="input-field"
+              />
+              <IonButton onClick={doLogin} expand="block" className="login-button">
+                Login
+              </IonButton>
+              <IonButton
+                routerLink="/it-36-lab/register"
+                expand="block"
+                fill="clear"
+                className="login-register-button"
+              >
+                Register
+              </IonButton>
+            </div>
+          </div>
+        )}
 
         <IonAlert
           isOpen={showAlert}
