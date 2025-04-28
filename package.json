@@ -3,7 +3,8 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "scripts": {
+  "homepage": "https://github.com/RipMickel/https://github.com/RipMickel/it-36-lab",
+"scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
