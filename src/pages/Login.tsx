@@ -26,7 +26,7 @@ const Login: React.FC = () => {
     style.innerHTML = `
       ion-content {
         --background: transparent;
-        background-image: url('https://img.freepik.com/free-photo/galaxy-nature-aesthetic-background-starry-sky-mountain-remixed-media_53876-126761.jpg?t=st=1745818411~exp=1745822011~hmac=da57517a476eb7aa23c4b5689935e72b190eef38899488df0d7bbc76a89b75a1&w=1060');
+        background-image: url('https://cdn.dribbble.com/userupload/23674116/file/original-c90e701769c613739af5fca461679712.gif');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -72,7 +72,7 @@ const Login: React.FC = () => {
           // Show loading screen (can be a GIF, Video, or Spinner)
           <div className="loading-screen">
             <img
-              src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZXlsejZjdzZ4b2VtbXFiNGx5Mndoc2p1c3VzMWJqbDgxNGhwN2VkMCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/C3brYLms1bhv2/giphy.gif" // Replace with your GIF or video URL
+              src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExbXoza2ticGk5YjdvYWR4MDVoczRvNnI1eTZtOGoxN3JjZnNtM2xhbiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/7VzgMsB6FLCilwS30v/giphy.gif" // Replace with your GIF or video URL
               alt="Loading..."
               style={{ width: '100%', height: '100%' }} // Adjust size as needed
             />
@@ -82,7 +82,7 @@ const Login: React.FC = () => {
           <div className="login-container">
             <div className="login-card">
               <img
-                src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExZXRhcGUwbmVsb3VzbGNiamRwc3Vsdms1d2Z3bnAzaHZzOGdxMHV5dyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/6utNxL2fGvEL5tFBZr/giphy.gif"
+                src="https://cdn.dribbble.com/userupload/23831334/file/original-7f0e4353cbef346a52cc82c68f1f73ff.gif"
                 alt="Login Animation"
                 className="login-icon"
               />
