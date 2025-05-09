@@ -10,16 +10,17 @@ import {
   IonLabel,
   IonCheckbox,
   IonButton,
-  IonTextarea,
   IonInput,
   IonText
 } from '@ionic/react';
 
 interface Task {
   name: string;
+  section?: string;
   completed: boolean;
   time: number;
-  timerId?: number | null; 
+  timerId?: number | null;
+  completedAt?: string;
 }
 
 const formatTime = (seconds: number) => {
@@ -29,12 +30,16 @@ const formatTime = (seconds: number) => {
 };
 
 const PCAssembly: React.FC = () => {
-  const [pcTasks, setPcTasks] = useState<Task[]>([]);
-  const [pcNotes, setPcNotes] = useState('');
+  const [tasks, setTasks] = useState<Task[]>([]);
   const [newTask, setNewTask] = useState('');
+  const [newSection, setNewSection] = useState('');
   const [username, setUsername] = useState('');
+  const [section, setSection] = useState('');
+  const [instructor, setInstructor] = useState('');
 
-  const defaultPcTasks = [
+  const isUserInfoComplete = username && section && instructor;
+
+  const defaultTasks = [
     'Install Motherboard',
     'Install CPU',
     'Apply Thermal Paste',
@@ -49,77 +54,66 @@ const PCAssembly: React.FC = () => {
   ].map(name => ({ name, completed: false, time: 0 }));
 
   useEffect(() => {
-    const savedPcTasks = localStorage.getItem('pcTasks');
-    const savedPcNotes = localStorage.getItem('pcNotes');
-    const savedUsername = localStorage.getItem('Username'); 
-
-    const parsedPcTasks = savedPcTasks ? JSON.parse(savedPcTasks) : [];
-    setPcTasks(parsedPcTasks.length > 0 ? parsedPcTasks : defaultPcTasks);
-    if (savedPcNotes) setPcNotes(savedPcNotes);
-    if (savedUsername) setUsername(savedUsername); 
+    setTasks(defaultTasks);
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem('pcTasks', JSON.stringify(pcTasks));
-  }, [pcTasks]);
-
-  useEffect(() => {
-    localStorage.setItem('pcNotes', pcNotes);
-  }, [pcNotes]);
-
-  useEffect(() => {
-    localStorage.setItem('Username', username);  // Corrected here (username with lowercase 'u')
-  }, [username]);  // Corrected here (username with lowercase 'u')
-
   const toggleTask = (index: number) => {
-    const updated = [...pcTasks];
+    if (!isUserInfoComplete) return;
+
+    const updated = [...tasks];
     const task = updated[index];
 
     if (!task.completed) {
       task.completed = true;
-      if (task.timerId !== null) clearInterval(task.timerId); // Clear the timer if it exists
+      task.completedAt = new Date().toLocaleString();
+      if (task.timerId !== null) clearInterval(task.timerId);
       task.timerId = null;
     } else {
       task.completed = false;
       task.time = 0;
+      task.completedAt = undefined;
     }
 
-    setPcTasks(updated);
+    setTasks(updated);
   };
 
   const startTimer = (index: number) => {
-    const updated = [...pcTasks];
+    if (!isUserInfoComplete) return;
+
+    const updated = [...tasks];
     const task = updated[index];
 
     if (task.completed) return;
-    if (task.timerId !== null) clearInterval(task.timerId); // Clear the previous timer if it exists
+    if (task.timerId !== null) clearInterval(task.timerId);
 
     const intervalId = setInterval(() => {
-      setPcTasks(prev => {
+      setTasks(prev => {
         const update = [...prev];
         update[index].time += 1;
         return update;
       });
     }, 1000);
 
-    task.timerId = intervalId as unknown as number; // Type cast the intervalId to number
-    setPcTasks(updated);
+    task.timerId = intervalId as unknown as number;
+    setTasks(updated);
   };
 
   const addTask = () => {
     if (!newTask.trim()) return;
-    setPcTasks([...pcTasks, { name: newTask, completed: false, time: 0 }]);
+    setTasks([...tasks, { name: newTask, section: newSection, completed: false, time: 0 }]);
     setNewTask('');
+    setNewSection('');
   };
 
-  const resetTasks = () => {
-    localStorage.removeItem('pcTasks');
-    localStorage.removeItem('pcNotes');
-    setPcTasks(defaultPcTasks);
-    setPcNotes('');
+  const resetAll = () => {
+    setUsername('');
+    setSection('');
+    setInstructor('');
+    setTasks(defaultTasks);
   };
 
-  const progress = Math.round((pcTasks.filter(t => t.completed).length / pcTasks.length) * 100);
+  const allCompleted = tasks.every(t => t.completed);
+  const totalConsumed = tasks.reduce((sum, task) => sum + task.time, 0);
 
   return (
     <IonPage>
@@ -130,64 +124,78 @@ const PCAssembly: React.FC = () => {
       </IonHeader>
 
       <IonContent className="ion-padding">
-        {/* Display the username */}
-        <IonText className="ion-margin-bottom">
-          <p>{username ? `Welcome, ${username}!` : 'Welcome, Guest!'}</p>
-        </IonText>
+        {/* Required User Info */}
+        <IonInput
+          placeholder="Name (required)"
+          value={username}
+          onIonChange={e => setUsername(e.detail.value!)}
+        />
+        <IonInput
+          placeholder="Section (required)"
+          value={section}
+          onIonChange={e => setSection(e.detail.value!)}
+        />
+        <IonInput
+          placeholder="Instructor (required)"
+          value={instructor}
+          onIonChange={e => setInstructor(e.detail.value!)}
+        />
 
+        {/* Task List */}
         <IonList>
-          {pcTasks.map((task, i) => (
+          {tasks.map((task, i) => (
             <IonItem key={i} className={task.completed ? 'ion-text-decoration-line-through' : ''}>
               <IonCheckbox
                 checked={task.completed}
                 onIonChange={() => toggleTask(i)}
-                disabled={task.completed}
+                disabled={!isUserInfoComplete || task.completed}
               />
               <IonLabel className="ion-margin-start">{task.name}</IonLabel>
               <IonButton
                 size="small"
                 onClick={() => startTimer(i)}
-                disabled={task.completed}
+                disabled={!isUserInfoComplete || task.completed}
               >
                 Start
               </IonButton>
-              <IonText color="danger" className="ion-margin-start">
+              <IonText className="ion-margin-start" color="danger">
                 {formatTime(task.time)}
               </IonText>
             </IonItem>
           ))}
         </IonList>
 
-        <div className="ion-margin-top">
-          <IonInput
-            placeholder="Add custom task"
-            value={newTask}
-            onIonChange={e => setNewTask(e.detail.value!)}
-          />
-          <IonButton expand="block" onClick={addTask} className="ion-margin-top">
-            Add Task
-          </IonButton>
-        </div>
-
-        <IonText className="ion-margin-top">
-          <p>{`Progress: ${pcTasks.filter(t => t.completed).length}/${pcTasks.length} tasks completed (${progress}%)`}</p>
-        </IonText>
-
-        <IonTextarea
-          placeholder="Add your Username here"
-          value={username}
-          onIonChange={e => setUsername(e.detail.value!)}
+        {/* Add Task */}
+        <IonInput
+          placeholder="New Task Name"
+          value={newTask}
+          onIonChange={e => setNewTask(e.detail.value!)}
         />
+     
 
-        <IonTextarea
-          placeholder="Add notes here..."
-          value={pcNotes}
-          onIonChange={e => setPcNotes(e.detail.value!)}
-        />
 
-        <IonButton expand="block" color="medium" onClick={resetTasks} className="ion-margin-top">
-          Reset Tasks & Notes
+        {/* Reset */}
+        <IonButton expand="block" color="medium" onClick={resetAll} className="ion-margin-top">
+          Reset All
         </IonButton>
+
+        {/* Report */}
+        {allCompleted && (
+          <IonText color="success" className="ion-margin-top">
+            <h2>📋 Task Completion Report</h2>
+            <p><strong>Name:</strong> {username}</p>
+            <p><strong>Section:</strong> {section}</p>
+            <p><strong>Instructor:</strong> {instructor}</p>
+            <ul>
+              {tasks.map((task, index) => (
+                <li key={index}>
+                  ✅ {task.name} - {formatTime(task.time)} (Completed at: {task.completedAt})
+                </li>
+              ))}
+            </ul>
+            <p><strong>Total Time Consumed:</strong> {formatTime(totalConsumed)}</p>
+          </IonText>
+        )}
       </IonContent>
     </IonPage>
   );
