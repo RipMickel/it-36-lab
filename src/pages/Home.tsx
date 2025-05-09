@@ -14,7 +14,6 @@ const Home: React.FC = () => {
   const tabs = [
     {name:'Music', tab:'feed',url: '/it-36-lab/app/home/feed', icon: musicalNote},
     {name: 'PC Assembly', tab: 'PC', url: '/it-36-lab/app/home/pcassembly', icon: laptopOutline},
-    {name:'Favorites',tab:'favorites', url: '/it-36-lab/app/home/favorites', icon: star},
   ]
   return (
     <IonReactRouter>
