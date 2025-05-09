@@ -114,6 +114,16 @@ const PCAssembly: React.FC = () => {
 
   const allCompleted = tasks.every(t => t.completed);
   const totalConsumed = tasks.reduce((sum, task) => sum + task.time, 0);
+  
+  // Calculate efficiency and grade
+  const expectedTimePerTask = 60; // 60 seconds expected time per task
+  const efficiency = (expectedTimePerTask * tasks.length) / totalConsumed * 100;
+
+  const grade = 
+    efficiency >= 90 ? 'A' :
+    efficiency >= 80 ? 'B' :
+    efficiency >= 70 ? 'C' :
+    efficiency >= 60 ? 'D' : 'F';
 
   return (
     <IonPage>
@@ -171,8 +181,6 @@ const PCAssembly: React.FC = () => {
           value={newTask}
           onIonChange={e => setNewTask(e.detail.value!)}
         />
-     
-
 
         {/* Reset */}
         <IonButton expand="block" color="medium" onClick={resetAll} className="ion-margin-top">
@@ -194,6 +202,7 @@ const PCAssembly: React.FC = () => {
               ))}
             </ul>
             <p><strong>Total Time Consumed:</strong> {formatTime(totalConsumed)}</p>
+            <p><strong>Grade:</strong> {grade}</p>
           </IonText>
         )}
       </IonContent>
